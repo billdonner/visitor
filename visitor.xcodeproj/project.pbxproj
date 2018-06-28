@@ -12,6 +12,7 @@
 		8836333720E419F700B555FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8836333520E419F700B555FC /* Main.storyboard */; };
 		8836333920E419F800B555FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8836333820E419F800B555FC /* Assets.xcassets */; };
 		8836333C20E419F800B555FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8836333A20E419F800B555FC /* LaunchScreen.storyboard */; };
+		88CA9FE420E4DCAA0056ABC4 /* LocMinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CA9FE320E4DCAA0056ABC4 /* LocMinder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		8836333820E419F800B555FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8836333B20E419F800B555FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8836333D20E419F800B555FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88CA9FE320E4DCAA0056ABC4 /* LocMinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocMinder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				8836333120E419F700B555FC /* AppDelegate.swift */,
+				88CA9FE320E4DCAA0056ABC4 /* LocMinder.swift */,
 				8836333320E419F700B555FC /* ViewController.swift */,
 				8836333520E419F700B555FC /* Main.storyboard */,
 				8836333820E419F800B555FC /* Assets.xcassets */,
@@ -96,6 +99,11 @@
 				TargetAttributes = {
 					8836332D20E419F700B555FC = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -135,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88CA9FE420E4DCAA0056ABC4 /* LocMinder.swift in Sources */,
 				8836333420E419F700B555FC /* ViewController.swift in Sources */,
 				8836333220E419F700B555FC /* AppDelegate.swift in Sources */,
 			);
