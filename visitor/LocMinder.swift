@@ -17,9 +17,10 @@ import CoreLocation
 // be sure to add background capability for location tracking
 // be sure to add necessary priv strings in Info.Plist
 
-enum LocationTechnique {
+enum LocationTechnique:String {
     
-    case eachUpdate // only supported technique at this moment
+    case eachUpdate // supported technique
+    case deferredUpdate //supported technique
     case visitEvent
     
 }
@@ -73,7 +74,7 @@ class LocMinder:NSObject {
     var locationManager: CLLocationManager = CLLocationManager()
     var startLocation: CLLocation!
     var completion:((String)->())!
-    var upcount = 0
+    var locationUpdateCount = 0
     var mode : LocationTechnique = .eachUpdate
     
     
@@ -91,20 +92,31 @@ class LocMinder:NSObject {
         locationManager.startUpdatingLocation()
     }
     
-    init(_ completion:@escaping (String)->() ) {
-        super.init()
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.delegate = self
-        startLocation = nil
-        self.completion = completion
-    }
     
-    func start(mode:LocationTechnique){
-        // ask permissions
+   
+    init(_ mode: LocationTechnique, completion:@escaping (String)->() ) {
+        super.init()
         
         self.mode = mode
-        startWhenInUse(self)
+        startLocation = nil
+        self.completion = completion
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.activityType = .other
+        locationManager.distanceFilter = 0.0
+        locationManager.delegate = self
+        if CLLocationManager.deferredLocationUpdatesAvailable() {
+            
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest // necessary for deferred
+            locationManager.distanceFilter = 10.0
+            locationManager.allowDeferredLocationUpdates(untilTraveled: 20.0, timeout: 15.0)
+        } else {
+            // if we cant use deferred updates, lower the accuracy
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        }
     }
+       
+ 
     
     func locationManager(_ manager: CLLocationManager,
                          didFailWithError error: Error) {
@@ -116,10 +128,17 @@ extension LocMinder:CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
-        upcount += 1
         
         
         let latestLocation: CLLocation = locations[locations.count - 1]
+        
+        locationUpdateCount += 1
+        
+        if startLocation == nil {
+            startLocation = latestLocation
+        }
+        
+        
         
         let latitudetext = String(format: "%.4f",
                                   latestLocation.coordinate.latitude)
@@ -132,9 +151,6 @@ extension LocMinder:CLLocationManagerDelegate {
         let vAccuracytext = String(format: "%.4f",
                                    latestLocation.verticalAccuracy)
         
-        if startLocation == nil {
-            startLocation = latestLocation
-        }
         
         let distanceBetween: CLLocationDistance =
             latestLocation.distance(from: startLocation)
@@ -142,13 +158,21 @@ extension LocMinder:CLLocationManagerDelegate {
         let distancetext = String(format: "%.2f", distanceBetween)
         
         let str =
-            ("\(latitudetext),\(longitudetext),\(hAccuracytext),\(altitudetext),\(vAccuracytext),\(distancetext),\(upcount),\(mode)")
+            ("\(latitudetext),\(longitudetext),\(hAccuracytext),\(altitudetext),\(vAccuracytext),\(distancetext),\(locationUpdateCount),\(mode)")
         
         let lat = latestLocation.coordinate.latitude
         let lon = latestLocation.coordinate.longitude
         let llc = LastKnownLocation(lat: lat, lon: lon, date: Date())
-        LastKnownLocation.savetoUserDefaults(l: llc
-        )
+        LastKnownLocation.savetoUserDefaults(l: llc)
         completion(str)
+    }
+ 
+    
+    // for deferrred mode
+    
+    func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
+        print("didFinishDeferredUpdatesWithError  \(String(describing: error))")
+        
+        manager.allowDeferredLocationUpdates(untilTraveled:deferUntilTraveled, timeout: deferTimeout)
     }
 }

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,41 +18,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qhb-Ft-6qz">
-                                <rect key="frame" x="20" y="20" width="7500" height="647"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qhb-Ft-6qz">
+                                <rect key="frame" x="20" y="20" width="335" height="647"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gi-YH-6Oq">
-                                        <rect key="frame" x="0.0" y="0.0" width="7500" height="215.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Type and Paramaters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOg-KQ-BiH">
+                                        <rect key="frame" x="9" y="0.0" width="317" height="90.5"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldItalicMT" family="Courier New" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1024" translatesAutoresizingMaskIntoConstraints="NO" id="YzS-tH-HOD">
-                                        <rect key="frame" x="0.0" y="215.5" width="7500" height="216"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faM-SI-HYf">
-                                        <rect key="frame" x="0.0" y="431.5" width="7500" height="215.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Stuff Will Go Here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="08i-n0-hUe">
+                                        <rect key="frame" x="40" y="90.5" width="255" height="99.5"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What IOS Sensors Are Reporting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfb-ez-MvI">
+                                        <rect key="frame" x="5.5" y="190" width="324.5" height="74"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldItalicMT" family="Courier New" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="faM-SI-HYf">
+                                        <rect key="frame" x="0.0" y="264" width="335" height="132"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="32"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What We Are Sending to Go Server" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xs-8B-85X">
+                                        <rect key="frame" x="4.5" y="396" width="326.5" height="70.5"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldItalicMT" family="Courier New" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3gi-YH-6Oq">
+                                        <rect key="frame" x="0.0" y="466.5" width="335" height="180.5"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="44"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="3gi-YH-6Oq" firstAttribute="height" secondItem="faM-SI-HYf" secondAttribute="height" id="VxX-3p-m0t"/>
+                                    <constraint firstItem="faM-SI-HYf" firstAttribute="leading" secondItem="qhb-Ft-6qz" secondAttribute="leading" id="35h-4x-sdo"/>
+                                    <constraint firstItem="3gi-YH-6Oq" firstAttribute="leading" secondItem="qhb-Ft-6qz" secondAttribute="leading" id="aM1-Nc-OsB"/>
+                                    <constraint firstAttribute="trailing" secondItem="08i-n0-hUe" secondAttribute="trailing" constant="40" id="edX-YW-YTB"/>
+                                    <constraint firstAttribute="trailing" secondItem="3gi-YH-6Oq" secondAttribute="trailing" id="hlJ-WV-d2A"/>
+                                    <constraint firstItem="08i-n0-hUe" firstAttribute="leading" secondItem="qhb-Ft-6qz" secondAttribute="leading" constant="40" id="hr4-Fp-HWv"/>
+                                    <constraint firstAttribute="trailing" secondItem="faM-SI-HYf" secondAttribute="trailing" id="loA-Tq-IY5"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="qhb-Ft-6qz" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="aXe-PL-hlF"/>
-                            <constraint firstItem="qhb-Ft-6qz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="bb4-sT-Iyu"/>
-                            <constraint firstItem="qhb-Ft-6qz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" multiplier="20" constant="20" id="qsb-MW-UYj"/>
-                            <constraint firstItem="qhb-Ft-6qz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="t0W-uW-xPN"/>
+                            <constraint firstItem="qhb-Ft-6qz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QjC-IV-Dnn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qhb-Ft-6qz" secondAttribute="trailing" constant="20" id="Uec-nQ-U4j"/>
+                            <constraint firstItem="qhb-Ft-6qz" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Xs4-tL-asy"/>
+                            <constraint firstItem="qhb-Ft-6qz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cCZ-ML-9pN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="bottomLabel" destination="faM-SI-HYf" id="FII-hc-L5d"/>
+                        <outlet property="middleLabel" destination="08i-n0-hUe" id="3bW-oe-5ZK"/>
                         <outlet property="topLabel" destination="3gi-YH-6Oq" id="ahc-Zu-jLD"/>
                     </connections>
                 </viewController>
@@ -61,7 +87,4 @@
             </objects>
         </scene>
     </scenes>
-    <resources>
-        <image name="1024" width="1024" height="1024"/>
-    </resources>
 </document>

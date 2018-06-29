@@ -8,24 +8,33 @@
 
 import UIKit
 import CoreLocation
+    let pingcycle = 10.0
+    let cyclesbeforeaskingagain = 4
+let deferUntilTraveled = 10.0
+let deferTimeout = 15.0
 
 
 class ViewController: UIViewController {
     var locMinder:LocMinder!
     var gameTimer: Timer!
-    var counter = 0
+    var counter = cyclesbeforeaskingagain
+    var mode:LocationTechnique = .deferredUpdate
+
+    var cyclenum = 0
     
+    
+    @IBOutlet weak var middleLabel: UILabel!
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var bottomLabel: UILabel!
     
     @objc func pollCycle () {
         
-        counter += 1
+        cyclenum += 1
         
         let llc = LastKnownLocation.fetchfromUserDefaults()
-        if let llc = llc {
-            self.topLabel.text = "Ping Server cycle# \(self.counter) \(llc)"
-            print("Ping Server cycle# \(self.counter) \(llc)")
+        if let llc = llc  {
+            self.topLabel.text = "\(mode) ping# \(self.cyclenum) \(llc.description()) secs:\(pingcycle)"
+            print(self.topLabel.text ?? "fubar")
         }
         else {
             self.topLabel.text = "\(self.counter) warming..."
@@ -34,7 +43,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        gameTimer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(pollCycle), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: pingcycle, target: self, selector: #selector(pollCycle), userInfo: nil, repeats: true)
         pollCycle()
         
     }
@@ -43,14 +52,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Override point for customization after application launch.
         // if not simulator, open console pipe
-        
-        locMinder = LocMinder(){ str in
+        self.middleLabel.text = "\(mode) ping every \(pingcycle) secs"
+        locMinder = LocMinder(mode){ str in
+            // com here when something interesting to show
             self.bottomLabel.text = str
             self.bottomLabel.setNeedsLayout()
+            self.counter -= 1
+            if self.counter == 0 {
             self.locMinder.startAlways(self)
+            }
         }
-        
-        locMinder.start (mode:.eachUpdate)
+        // always start with wheninuse, will ask for alwyas in a little while
+        locMinder.startWhenInUse(self)
         
     }
     
