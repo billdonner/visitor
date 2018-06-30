@@ -10,22 +10,22 @@ import UIKit
 import CoreLocation
     let pingcycle = 10.0
     let cyclesbeforeaskingagain = 4
-let deferUntilTraveled = 10.0
-let deferTimeout = 15.0
+    let tenMeters = 10.0
+    let deferUntilTraveled = 10.0
+    let deferTimeout = 15.0
+    let locationTechnique:LocationTechnique = .visitEvent
 
 
-class ViewController: UIViewController {
+class ModeTestViewController: UIViewController {
+   
     var locMinder:LocMinder!
     var gameTimer: Timer!
     var counter = cyclesbeforeaskingagain
-    var mode:LocationTechnique = .deferredUpdate
-
+    var mode:LocationTechnique = locationTechnique
     var cyclenum = 0
-    
-    
-    @IBOutlet weak var middleLabel: UILabel!
-    @IBOutlet weak var topLabel: UILabel!
-    @IBOutlet weak var bottomLabel: UILabel!
+    @IBOutlet weak var testInfo: UILabel!
+    @IBOutlet weak var serverChatInfo: UILabel!
+    @IBOutlet weak var iosSensorInfo: UILabel!
     
     @objc func pollCycle () {
         
@@ -33,11 +33,8 @@ class ViewController: UIViewController {
         
         let llc = LastKnownLocation.fetchfromUserDefaults()
         if let llc = llc  {
-            self.topLabel.text = "\(mode) ping# \(self.cyclenum) \(llc.description()) secs:\(pingcycle)"
-            print(self.topLabel.text ?? "fubar")
-        }
-        else {
-            self.topLabel.text = "\(self.counter) warming..."
+            self.serverChatInfo.text = "\(mode) ping# \(self.cyclenum)\n\(llc.description())"
+           // print(self.topLabel.text ?? "fubar")
         }
     }
     
@@ -52,11 +49,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Override point for customization after application launch.
         // if not simulator, open console pipe
-        self.middleLabel.text = "\(mode) ping every \(pingcycle) secs"
+        self.serverChatInfo.text = " warming up ..."
+        self.testInfo.text = "\(mode) ping every \(pingcycle) secs"
         locMinder = LocMinder(mode){ str in
             // com here when something interesting to show
-            self.bottomLabel.text = str
-            self.bottomLabel.setNeedsLayout()
+            self.iosSensorInfo.text = str
+            self.iosSensorInfo.setNeedsLayout()
             self.counter -= 1
             if self.counter == 0 {
             self.locMinder.startAlways(self)
@@ -64,7 +62,6 @@ class ViewController: UIViewController {
         }
         // always start with wheninuse, will ask for alwyas in a little while
         locMinder.startWhenInUse(self)
-        
     }
     
     override func didReceiveMemoryWarning() {
