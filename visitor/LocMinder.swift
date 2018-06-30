@@ -132,8 +132,8 @@ class LocMinder:NSObject {
         case .deferredUpdate:
             if  CLLocationManager.deferredLocationUpdatesAvailable() {
                 locationManager.desiredAccuracy = kCLLocationAccuracyBest // necessary for deferred
-                locationManager.distanceFilter = tenMeters
-                locationManager.allowDeferredLocationUpdates(untilTraveled:deferUntilTraveled, timeout: deferTimeout)
+                locationManager.distanceFilter = Cfg.tenMeters
+                locationManager.allowDeferredLocationUpdates(untilTraveled:Cfg.deferUntilTraveled, timeout: Cfg.deferTimeout)
             } else {
                 // if we cant use deferred updates, lower the accuracy
                 locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -217,6 +217,6 @@ extension LocMinder:CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
         print("didFinishDeferredUpdatesWithError  \(String(describing: error))")
         
-        manager.allowDeferredLocationUpdates(untilTraveled:deferUntilTraveled, timeout: deferTimeout)
+        manager.allowDeferredLocationUpdates(untilTraveled:Cfg.deferUntilTraveled, timeout: Cfg.deferTimeout)
     }
 }
